@@ -14,9 +14,9 @@ int main()
   bool balanced = true;
   char openSymbol;
   string expression = "4 5 6 2 ^ - +";
-  
+
   /*cout << "Enter an expression and press return." << endl;
-  cin.get(symbol); 
+  cin.get(symbol);
   expression += symbol;
 
   while (symbol != '\n' && balanced)
@@ -46,69 +46,76 @@ int main()
 
   cout << expression << endl;
 
-  //Now evaluate the arithmetic expression.
-  //Build the stack.
+  // Now evaluate the arithmetic expression.
+  // Build the stack.
   int result;
   int op1, op2;
   string operand = "";
-  for(char c : expression){
-	  if(c != '\n'){
-		  if(c == '+' || c == '-' || c == '*' || c == '/' || c == '^'){
-			  //operator: pop operand, pop operand, push result
-			  op1 = std::stoi(expressionStack.Top(), nullptr, 10);
-			  expressionStack.Pop();
-			  op2 = std::stoi(expressionStack.Top(), nullptr, 10);
-			  expressionStack.Pop();
-			  switch(c){
-						case '+':
-							result = op2 + op1;
-							expressionStack.Push(std::to_string(result));
-							break;
-						case '-':
-							result = op2 - op1;
-							expressionStack.Push(std::to_string(result));
-							break;
-						case '*':
-							result = op2 * op1;
-							expressionStack.Push(std::to_string(result));
-							break;
-						case '/':
-							result = op2 / op1;
-							expressionStack.Push(std::to_string(result));
-							break;
-						case '^':
-							result = pow(op2, op1);
-							expressionStack.Push(std::to_string(result));
-							break;
-						default:
-							break;
-			  }
-		  }
-		  else if(c != ' '){
-			  //build operand
-			  operand += c;
-		  }
-		  else{ //This was a space character
-			  //store the operand if it isn't empty.
-			  //it is empty if we have found an operator before.
-			  if(operand != ""){
-				  expressionStack.Push(operand);
-			  }
-			  operand = "";
-		  }
-	  }
+  for (char c : expression)
+  {
+    if (c != '\n')
+    {
+      if (c == '+' || c == '-' || c == '*' || c == '/' || c == '^')
+      {
+        // operator: pop operand, pop operand, push result
+        op1 = std::stoi(expressionStack.Top(), nullptr, 10);
+        expressionStack.Pop();
+        op2 = std::stoi(expressionStack.Top(), nullptr, 10);
+        expressionStack.Pop();
+        switch (c)
+        {
+        case '+':
+          result = op2 + op1;
+          expressionStack.Push(std::to_string(result));
+          break;
+        case '-':
+          result = op2 - op1;
+          expressionStack.Push(std::to_string(result));
+          break;
+        case '*':
+          result = op2 * op1;
+          expressionStack.Push(std::to_string(result));
+          break;
+        case '/':
+          result = op2 / op1;
+          expressionStack.Push(std::to_string(result));
+          break;
+        case '^':
+          result = pow(op2, op1);
+          expressionStack.Push(std::to_string(result));
+          break;
+        default:
+          break;
+        }
+      }
+      else if (c != ' ')
+      {
+        // build operand
+        operand += c;
+      }
+      else
+      { // This was a space character
+        // store the operand if it isn't empty.
+        // it is empty if we have found an operator before.
+        if (operand != "")
+        {
+          expressionStack.Push(operand);
+        }
+        operand = "";
+      }
+    }
   }
   expressionStack.Print();
   return 0;
 }
-    
+
 bool IsOpen(char symbol)
 {
   if ((symbol == '(') || (symbol == '{') || (symbol == '['))
     return true;
   else
     return false;
-}      
+}
 
 bool IsClosed(char symbol)
 {
@@ -116,11 +123,9 @@ bool IsClosed(char symbol)
     return true;
   else
     return false;
-}      
+}
 
 bool Matches(char symbol, char openSymbol)
 {
-  return  (((openSymbol == '(') && symbol == ')')
-        || ((openSymbol == '{') && symbol == '}')
-        || ((openSymbol == '[') && symbol == ']'));
+  return (((openSymbol == '(') && symbol == ')') || ((openSymbol == '{') && symbol == '}') || ((openSymbol == '[') && symbol == ']'));
 }

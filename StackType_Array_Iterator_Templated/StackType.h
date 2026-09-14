@@ -69,6 +69,8 @@ public:
   StackTypeIterator<ItemType> begin();
   StackTypeIterator<ItemType> end();
 
+  void ReplaceItem(StackType &stack, ItemType oldItem, ItemType newItem);
+
 private:
   int top;
   int maxStack;    // Maximum number of stack items.
@@ -181,6 +183,17 @@ void StackType<ItemType>::Print()
     }
   }
   cout << ":Bottom" << endl;
+}
+
+template <typename ItemType>
+
+void StackType<ItemType>::ReplaceItem(StackType &stack, ItemType oldItem, ItemType newItem)
+{
+  if (top == oldItem)
+  {
+    pop();
+    push(newItem);
+  }
 }
 
 #endif

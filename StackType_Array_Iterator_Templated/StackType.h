@@ -70,6 +70,43 @@ public:
   StackTypeIterator<ItemType> end();
 
   void ReplaceItem(StackType &stack, ItemType oldItem, ItemType newItem);
+  // Function: Replaces all occurrences of oldItem with newItem.
+  // Precondition: stack has been initialized.
+  // Postcondition: Each occurrence of oldItem in stack has been replaced by newItem.
+
+  friend bool Identical(const StackType &stack1, const StackType &stack2)
+
+  //   Function: Determines if two stacks are identical.
+  // Preconditions: stack1 and stack2 have been initialized.
+  // Postconditions: stack1 and stack2 are unchanged. Returns true if identical, false otherwise.
+
+  {
+    bool identical = true;
+
+    int stack1Top = stack1.top;
+    int stack2Top = stack2.top;
+
+    if (stack1Top != stack2Top)
+    {
+      identical = false;
+      return identical;
+    }
+
+    // stack1.top == stack2.top (they are the same size)
+
+    int *ptrStack1 = stack1.items; // pts to top of stack1
+    int *ptrStack2 = stack2.items; // pts to top of stack 2
+
+    for (int k = stack1Top; k >= 0; k--)
+    {
+      if (*ptrStack1 != *ptrStack2)
+      {
+        identical = false;
+      }
+    }
+
+    return identical;
+  };
 
 private:
   int top;
@@ -150,6 +187,9 @@ ItemType StackType<ItemType>::Top()
   return items[top];
 }
 
+// template <typename ItemType>
+// ItemType StackType<ItemType>::Top const();
+
 template <typename ItemType>
 StackType<ItemType>::~StackType()
 {
@@ -212,7 +252,7 @@ void StackType<ItemType>::ReplaceItem(StackType &stack, ItemType oldItem, ItemTy
     tempItem = tempStack.Top();
     stack.Push(tempItem);
     tempStack.Pop();
-    }
+  }
   return;
 }
 

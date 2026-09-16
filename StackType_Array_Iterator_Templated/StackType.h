@@ -189,11 +189,31 @@ template <typename ItemType>
 
 void StackType<ItemType>::ReplaceItem(StackType &stack, ItemType oldItem, ItemType newItem)
 {
-  if (top == oldItem)
+  StackType tempStack; // figure out how to provide size of main stack to tempStack constructor
+
+  ItemType tempItem;
+
+  while (!stack.IsEmpty())
   {
-    pop();
-    push(newItem);
+
+    if (stack.Top() == oldItem) // new target is replaced in-place
+    {
+      stack.Pop();
+      stack.Push(newItem);
+    }
+    tempItem = stack.Top(); // returns copy
+    tempStack.Push(tempItem);
+    stack.Pop();
   }
+
+  while (!tempStack.IsEmpty())
+
+  {
+    tempItem = tempStack.Top();
+    stack.Push(tempItem);
+    tempStack.Pop();
+    }
+  return;
 }
 
 #endif

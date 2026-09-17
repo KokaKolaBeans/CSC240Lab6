@@ -16,21 +16,22 @@ class StackTypeIterator
 {
 public:
   // Constructor to initialize the iterator with a location and pointer to items
-  StackTypeIterator(int location, ItemType *itemsPtr);
+  StackTypeIterator(int location, ItemType* itemsPtr);
 
   // Dereference operator for the iterator.
-  ItemType &operator*();
+  ItemType& operator*();
 
   // Pre-increment operator
-  StackTypeIterator<ItemType> &operator++();
+  StackTypeIterator<ItemType>& operator++();
 
   // Inequality operator
-  bool operator!=(const StackTypeIterator<ItemType> &it) const;
+  bool operator!=(const StackTypeIterator<ItemType>& it) const;
 
 private:
   int index;
-  ItemType *items;
+  ItemType* items;
 };
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -39,29 +40,30 @@ private:
 ///////////////////////////////////////////////////////////////////////////////
 
 template <typename ItemType>
-StackTypeIterator<ItemType>::StackTypeIterator(int location, ItemType *itemsPtr)
+StackTypeIterator<ItemType>::StackTypeIterator(int location, ItemType* itemsPtr)
 {
   this->index = location;
   this->items = itemsPtr;
 }
 
 template <typename ItemType>
-ItemType &StackTypeIterator<ItemType>::operator*()
+ItemType& StackTypeIterator<ItemType>::operator*()
 {
   return items[index];
 }
 
 template <typename ItemType>
-StackTypeIterator<ItemType> &StackTypeIterator<ItemType>::operator++()
+StackTypeIterator<ItemType>& StackTypeIterator<ItemType>::operator++()
 {
   index++;
   return *this;
 }
 
 template <typename ItemType>
-bool StackTypeIterator<ItemType>::operator!=(const StackTypeIterator<ItemType> &it) const
+bool StackTypeIterator<ItemType>::operator!=(const StackTypeIterator<ItemType>& it) const
 {
   return index != it.index;
 }
+
 
 #endif

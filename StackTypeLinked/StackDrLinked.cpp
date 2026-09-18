@@ -4,33 +4,33 @@
 #include <string>
 #include <cctype>
 #include <cstring>
-
+#include <random>
 #include "StackTypeLinked.h"
 
 using namespace std;
 
 int main()
 {
-  //Test the Print function.
+
+  // Test the Print function.
   StackTypeLinked<char> myStack;
+
   myStack.Push('A');
   myStack.Push('K');
   myStack.Push('G');
   myStack.Push('K');
   myStack.Print();
-  //Test copy constructor
+  // Test copy constructor
   StackTypeLinked<char> newStack(myStack);
-  newStack.Print(); 
+  newStack.Print();
   StackTypeLinked<char> anotherStack;
   anotherStack.Push('B');
   anotherStack.Push('C');
   anotherStack.Push('D');
   anotherStack.Push('E');
-  anotherStack.Print(); 
-  //Test operator=
+  anotherStack.Print();
+  // Test operator=
   anotherStack = newStack;
   anotherStack.Print();
   return 0;
 }
-
-

@@ -69,44 +69,9 @@ public:
   StackTypeIterator<ItemType> begin();
   StackTypeIterator<ItemType> end();
 
-  template <class T>
+  template <class T> // Type T prevents shadowing
 
   friend bool Identical(const StackType<T> &stack1, const StackType<T> &stack2);
-
-  // void ReplaceItem(StackType &stack, ItemType oldItem, ItemType newItem);
-  // // Function: Replaces all occurrences of oldItem with newItem.
-  // // Precondition: stack has been initialized.
-  // // Postcondition: Each occurrence of oldItem in stack has been replaced by newItem.
-
-  // friend bool Identical(const StackType &stack1, const StackType &stack2)
-
-  // {
-  //   bool identical = true;
-
-  //   int stack1Top = stack1.top;
-  //   int stack2Top = stack2.top;
-
-  //   if (stack1Top != stack2Top)
-  //   {
-  //     identical = false;
-  //     return identical;
-  //   }
-
-  //   // stack1.top == stack2.top (they are the same size)
-
-  //   int *ptrStack1 = stack1.items; // pts to top of stack1
-  //   int *ptrStack2 = stack2.items; // pts to top of stack 2
-
-  //   for (int k = stack1Top; k >= 0; k--)
-  //   {
-  //     if (*ptrStack1 != *ptrStack2)
-  //     {
-  //       identical = false;
-  //     }
-  //   }
-
-  //   return identical;
-  // };
 
 private:
   int top;
@@ -224,36 +189,5 @@ void StackType<ItemType>::Print()
   }
   cout << ":Bottom" << endl;
 }
-
-// template <typename ItemType>
-
-// void StackType<ItemType>::ReplaceItem(StackType &stack, ItemType oldItem, ItemType newItem)
-// {
-//   StackType tempStack; // figure out how to provide size of main stack to tempStack constructor
-
-//   ItemType tempItem;
-
-//   while (!stack.IsEmpty())
-//   {
-
-//     if (stack.Top() == oldItem) // new target is replaced in-place
-//     {
-//       stack.Pop();
-//       stack.Push(newItem);
-//     }
-//     tempItem = stack.Top(); // returns copy
-//     tempStack.Push(tempItem);
-//     stack.Pop();
-//   }
-
-//   while (!tempStack.IsEmpty())
-
-//   {
-//     tempItem = tempStack.Top();
-//     stack.Push(tempItem);
-//     tempStack.Pop();
-//   }
-//   return;
-// }
 
 #endif

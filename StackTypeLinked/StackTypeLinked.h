@@ -33,7 +33,6 @@ public:
 	bool IsEmpty() const;
 	bool IsFull() const;
 	void Print();
-	void ReplaceItem(StackTypeLinked &stack, ItemType oldItem, ItemType newItem);
 
 	template <class T>
 
@@ -225,35 +224,5 @@ bool StackTypeLinked<ItemType>::IsEmpty() const
 {
 	return (topPtr == nullptr);
 }
-
-// template <class ItemType>
-// void StackTypeLinked<ItemType>::ReplaceItem(StackTypeLinked &stack, ItemType oldItem, ItemType newItem)
-// {
-// 	StackTypeLinked tempStack;
-// 	ItemType tempItem;
-
-// 	while (stack.Top().next != nullptr)
-// 	{
-
-// 		tempItem = stack.Top(); // returns current Top ItemType
-
-// 		if (tempItem.info == newItem.info)
-// 		{
-// 			stack.Pop();
-// 			stack.Push(newItem);
-// 		}
-
-// 		tempStack.Push(tempItem);
-// 	}
-
-// 	while (tempStack.Top().next != nullptr)
-// 	{
-// 		tempItem = tempStack.Top();
-// 		stack.Push(tempItem);
-// 	}
-// 	return;
-// }
-
-// bool Identical(const StackType &stack1, const StackType &stack2)
 
 #endif

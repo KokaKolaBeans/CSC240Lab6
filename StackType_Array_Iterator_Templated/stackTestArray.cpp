@@ -11,7 +11,7 @@
 #include <string>
 #include <cstdlib>
 #include <time.h>
-#include "StackType.h"
+#include "StackTypeArray.h"
 
 using namespace std;
 
@@ -62,30 +62,24 @@ bool Identical(const StackType<ItemType> &stack1, const StackType<ItemType> &sta
 {
     bool identical = true;
 
-    int stack1Top = stack1.top;
-    int stack2Top = stack2.top;
+    if (stack1.top != stack2.top) // if stack1.top == stack2.top, they are the same size
 
-    if (stack1Top != stack2Top)
     {
         identical = false;
         return identical;
     }
 
-    // stack1.top == stack2.top (they are the same size)
-
-    int *ptrStack1 = stack1.items; // pts to top of stack1
-    int *ptrStack2 = stack2.items; // pts to top of stack 2
-
-    for (int k = stack1Top; k >= 0; k--)
+    for (int k = stack1.top; k >= 0; k--)
     {
-        if (*ptrStack1 != *ptrStack2)
+        if (stack1.items[k] != stack2.items[k])
         {
             identical = false;
+            break;
         }
     }
 
     return identical;
-};
+}
 
 int main()
 {
@@ -158,15 +152,18 @@ int main()
     // stack.Push(3);
     // stack.Push(4);
 
-    ReplaceItem(stackA, 4, 10); // replace all occurances of '4' with '10'
+    ReplaceItem(stackB, 4, 400); // replace all occurances of '4' with '10'
 
-    ReplaceItem(stackB, 2, 100);
-    stackA.Print();
+    ReplaceItem(stackB, 2, 200);
+
+    cout << "stackB; 4 --> 400 and 2 --> 200 stackB.Print()" << endl;
+
     stackB.Print();
 
+    // stackA.Print();
     // g++ -std=c++17 stackTest.cpp -o StackProgram && ./StackProgram
 
     return 0;
 }
 
-// g++ -std=c++17 stackTest.cpp -o StackProgram
+// g++ -std=c++17 stackTestArray.cpp -o stackTestArray && ./stackTestArray

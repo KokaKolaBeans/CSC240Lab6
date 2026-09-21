@@ -72,6 +72,9 @@ public:
   template <class T> // Type T prevents shadowing
 
   friend bool Identical(const StackType<T> &stack1, const StackType<T> &stack2);
+  //   Function: Determines if two stacks are identical.
+  // Preconditions: stack1 and stack2 have been initialized.
+  // Postconditions: stack1 and stack2 are unchanged. Returns true if identical, false otherwise.
 
 private:
   int top;

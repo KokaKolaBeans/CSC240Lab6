@@ -34,9 +34,13 @@ public:
 	bool IsFull() const;
 	void Print();
 
-	template <class T>
+	template <class T> // Type T prevents shadowing
 
 	friend bool Identical(const StackTypeLinked<T> &stack1, const StackTypeLinked<T> &stack2);
+
+	// Function: Determines if two stacks are identical.
+	// Preconditions: stack1 and stack2 have been initialized.
+	// Postconditions: stack1 and stack2 are unchanged. Returns true if identical, false otherwise.
 
 private:
 	NodeType<ItemType> *topPtr;
@@ -68,15 +72,28 @@ StackTypeLinked<ItemType> &StackTypeLinked<ItemType>::operator=(const StackTypeL
 			location = location->next;
 			index++;
 		}
+
 		location = rhs.topPtr;
-		topPtr = nullptr;
+
+		NodeType<ItemType> *tempPtr;
+
+		while (topPtr != nullptr)
+		{
+			tempPtr = topPtr;
+			topPtr = topPtr->next;
+			delete tempPtr;
+		}
+		// topPtr = nullptr;
 		for (int i = length - 1; i >= 0; i--)
 		{
 			Push(items[i]);
 		}
+
+		delete[] items;
 	}
 	return *this;
 }
+// Copy Constructor
 // Copy Constructor
 template <class ItemType>
 StackTypeLinked<ItemType>::StackTypeLinked(const StackTypeLinked<ItemType> &rhs)
@@ -99,11 +116,15 @@ StackTypeLinked<ItemType>::StackTypeLinked(const StackTypeLinked<ItemType> &rhs)
 		index++;
 	}
 	location = rhs.topPtr;
-	topPtr = nullptr;
+
+	topPtr = nullptr; // No deletion loop needed, just initialize to null
+
 	for (int i = length - 1; i >= 0; i--)
 	{
 		Push(items[i]);
 	}
+
+	delete[] items; // Corrected syntax – Memory Leak fixed
 }
 
 template <class ItemType>
